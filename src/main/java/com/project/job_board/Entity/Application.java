@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,5 +38,15 @@ public class Application {
   Long id;
 
   String status, applicationDate, notes;
+
+  @ManyToOne
+  @JoinColumn(name="jobId")
+  Job job;
+
+  @ManyToOne
+  @JoinColumn(name="applicantId")
+  Applicant applicant;
+
+  
 
 }

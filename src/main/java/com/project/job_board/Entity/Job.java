@@ -1,10 +1,13 @@
 package com.project.job_board.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,4 +38,7 @@ public class Job {
   Long id;
 
   String title, discription, location, requirements, responsibilities;
+
+  @OneToMany(mappedBy = "job")
+  List<Application> applications;
 }

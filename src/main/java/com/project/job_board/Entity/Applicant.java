@@ -1,11 +1,14 @@
 package com.project.job_board.Entity;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,4 +39,7 @@ public class Applicant {
   Long id;
 
   String firstName, lastName, email, resume, coverletter;
+
+  @OneToMany(mappedBy = "applicant")
+  List<Application> applications;
 }
