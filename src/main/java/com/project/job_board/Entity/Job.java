@@ -2,6 +2,7 @@ package com.project.job_board.Entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +40,6 @@ public class Job {
 
   String title, discription, location, requirements, responsibilities;
 
-  @OneToMany(mappedBy = "job")
+  @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
   List<Application> applications;
 }

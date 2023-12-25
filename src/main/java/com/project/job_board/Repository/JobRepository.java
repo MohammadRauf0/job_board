@@ -6,4 +6,6 @@ import com.project.job_board.Entity.Job;
 
 public interface JobRepository extends JpaRepository<Job, Long>{
 
+  Job findByTitle(String title);
+
 }

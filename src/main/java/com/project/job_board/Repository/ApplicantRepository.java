@@ -6,4 +6,6 @@ import com.project.job_board.Entity.Applicant;
 
 public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
 
+  Applicant getByFirstName(String firstName);
+
 }

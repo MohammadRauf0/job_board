@@ -6,4 +6,6 @@ import com.project.job_board.Entity.Employer;
 
 public interface EmployerRepository extends JpaRepository<Employer, Long>{
 
+  Employer findByCompanyName(String companyName);
+
 }
