@@ -1,5 +1,7 @@
 package com.project.job_board.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,14 +42,17 @@ public class Application {
   String status, applicationDate, notes;
 
   @ManyToOne
+  @JsonBackReference
   @JoinColumn(name = "jobId")
   Job job;
 
   @ManyToOne
+  @JsonBackReference
   @JoinColumn(name = "applicantId")
   Applicant applicant;
 
   @ManyToOne
+  @JsonBackReference
   @JoinColumn(name = "employerId")
   Employer employer;
 

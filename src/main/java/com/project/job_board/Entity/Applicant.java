@@ -2,6 +2,8 @@ package com.project.job_board.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,5 +43,6 @@ public class Applicant {
   String firstName, lastName, email, resume, coverletter;
 
   @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonManagedReference
   List<Application> applications;
 }
