@@ -28,7 +28,7 @@ public class ApplicantController {
   }
 
   @PostMapping("/addApplicants")
-  public List<Applicant> addApplicant(@RequestBody List<Applicant> applicant){
+  public List<Applicant> addApplicants(@RequestBody List<Applicant> applicant){
     return applicantService.saveApplicants(applicant);
   }
 

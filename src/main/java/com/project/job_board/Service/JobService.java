@@ -14,40 +14,43 @@ public class JobService {
   @Autowired
   JobRepository jobRepository;
 
-  public Job saveJob(Job job){
+  public Job saveJob(Job job) {
     return jobRepository.save(job);
   }
 
-  public List<Job> saveJobs(List<Job> jobs){
+  public List<Job> saveJobs(List<Job> jobs) {
     return jobRepository.saveAll(jobs);
   }
 
-  public List<Job> getJobs(){
+  public List<Job> getJobs() {
     return jobRepository.findAll();
   }
 
-  public Job getJobById(Long id){
+  public Job getJobById(Long id) {
     return jobRepository.findById(id).orElse(null);
   }
 
-  public Job getJobByTitle(String title){
+  public Job getJobByTitle(String title) {
     return jobRepository.findByTitle(title);
   }
 
-  public String deleteJob(Long id){
+  public String deleteJob(Long id) {
     jobRepository.deleteById(id);
     return "Deleted Successfully" + id;
   }
 
-  public Job updateJob(Job job){
+  public Job updateJob(Job job) {
     Job existingJob = jobRepository.findById(job.getId()).orElse(null);
-    existingJob.setTitle(job.getTitle());
-    existingJob.setDiscription(job.getDiscription());
-    existingJob.setLocation(job.getLocation());
-    existingJob.setRequirements(job.getRequirements());
-    existingJob.setResponsibilities(job.getResponsibilities());
-    existingJob.setApplications(job.getApplications());
-    return jobRepository.save(existingJob);
+    if (existingJob != null) {
+      existingJob.setTitle(job.getTitle());
+      existingJob.setDiscription(job.getDiscription());
+      existingJob.setLocation(job.getLocation());
+      existingJob.setRequirements(job.getRequirements());
+      existingJob.setResponsibilities(job.getResponsibilities());
+
+      return jobRepository.save(existingJob);
+    }
+    return null;
   }
 
 }

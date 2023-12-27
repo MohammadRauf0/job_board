@@ -41,12 +41,15 @@ public class ApplicantService {
 
   public Applicant updateApplicant(Applicant applicant){
     Applicant existingApplicant = applicantRepository.findById(applicant.getId()).orElse(null);
-    existingApplicant.setFirstName(applicant.getFirstName());
-    existingApplicant.setLastName(applicant.getLastName());
-    existingApplicant.setEmail(applicant.getEmail());
-    existingApplicant.setResume(applicant.getResume());
-    existingApplicant.setCoverletter(applicant.getCoverletter());
-    existingApplicant.setApplications(applicant.getApplications());
-    return applicantRepository.save(existingApplicant);
+    if(existingApplicant!=null){
+      existingApplicant.setFirstName(applicant.getFirstName());
+      existingApplicant.setLastName(applicant.getLastName());
+      existingApplicant.setEmail(applicant.getEmail());
+      existingApplicant.setResume(applicant.getResume());
+      existingApplicant.setCoverletter(applicant.getCoverletter());
+
+      return applicantRepository.save(existingApplicant);
+    }
+    return null;
   }
 }

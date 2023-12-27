@@ -27,7 +27,7 @@ public class JobController {
   }
 
   @PostMapping("/addJobs")
-  public List<Job> addJob(@RequestBody List<Job> job){
+  public List<Job> addJobs(@RequestBody List<Job> job){
     return jobService.saveJobs(job);
   }
 

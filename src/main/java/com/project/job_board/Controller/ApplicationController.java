@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.job_board.Entity.Applicant;
 import com.project.job_board.Entity.Application;
-import com.project.job_board.Entity.Job;
 import com.project.job_board.Service.ApplicationService;
 
 @RestController
@@ -29,7 +27,7 @@ public class ApplicationController {
   }
 
   @PostMapping("/addApplications")
-  public List<Application> addApplication(@RequestBody List<Application> application) {
+  public List<Application> addApplications(@RequestBody List<Application> application) {
     return applicationService.saveApplications(application);
   }
 
@@ -55,26 +53,46 @@ public class ApplicationController {
 
   @GetMapping("/ApplicantAndJob/{applicationId}")
   public String applicationJob(@PathVariable Long applicationId) {
-    Application application = applicationService.getApplicationById(applicationId);
-    if (application == null) {
-      // Handle the case where the application with the given ID was not found.
-      return "Application not found for ID: " + applicationId;
-    }
-    Job job = application.getJob();
-    Applicant applicant = application.getApplicant();
-    String result = "Date: " + application.getApplicationDate() + "<br>" +
-        "Status: " + application.getStatus() + "<br>" +
-        "Notes: " + application.getNotes() + "<br>" +
-        "Applicant: <br> {<br> name : " + applicant.getFirstName() +
-        " <br> Surname : " + applicant.getLastName() +
-        " <br> Email : " + applicant.getEmail() +
-        " <br> Resume : " + applicant.getResume() +
-        " <br> CoverLetter : " + applicant.getCoverletter() + "<br>}<br>" +
-        "Job: <br>{ <br>title:" + job.getTitle() +
-        " <br>Location: " + job.getLocation() +
-        " <br>Discription: " + job.getDiscription() +
-        " <br>Requirements: " + job.getRequirements() +
-        " <br>Responsibilities: " + job.getResponsibilities() + "}";
-    return result;
+    return applicationService.applicationJob(applicationId);
+  }
+
+  @PostMapping("/setEmployer/{applicationId}/{employerId}")
+  public Application setEmployer(@PathVariable Long applicationId, @PathVariable Long employerId){
+    return applicationService.setEmployer(applicationId, employerId);
+  }
+
+  @PostMapping("/setJob/{applicationId}/{jobId}")
+  public Application setJob(@PathVariable Long applicationId, @PathVariable Long jobId){
+    return applicationService.setJob(applicationId, jobId);
+  }
+
+  @PostMapping("/setApplicant/{applicationId}/{applicantId}")
+  public Application setApplicant(@PathVariable Long applicationId, @PathVariable Long applicantId){
+    return applicationService.setApplicant(applicationId, applicantId);
+  }
+
+  @PostMapping("/setAllRelations/{ApplicationId}/{applicantId}/{jobId}/{EmployerId}")
+  public Application setAllRelations(@PathVariable Long applicationId,@PathVariable Long applicantId, @PathVariable Long jobId, @PathVariable Long employerId){
+    return applicationService.setEverything(applicationId, applicantId, jobId, employerId);
+  }
+
+  @PostMapping("/create/{applicantId}/{jobId}/{employerId}")
+  public Application createNewApplication(@RequestBody Application application, @PathVariable Long applicantId,@PathVariable Long jobId, @PathVariable Long employerId){
+    return applicationService.createApplication(application, applicantId, jobId, employerId);
+  }
+
+  @GetMapping("/jobApplications/{jobId}")
+  public List<Application> getApplicationByJobId(@PathVariable Long jobId){
+    return applicationService.getApplicationsByJobId(jobId);
+  }
+
+  @GetMapping("/employerApplications/{employerId}")
+  public List<Application> getApplicationByEmployerId(@PathVariable Long employerId){
+    return applicationService.getApplicationsByEmployerId(employerId);
+  }
+
+  @GetMapping("/applicantApplications/{applicantId}")
+  public List<Application> getApplicationsByUserId(@PathVariable Long applicantId){
+    return applicationService.getApplicationsByApplicantId(applicantId);
   }
 }
