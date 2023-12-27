@@ -55,4 +55,9 @@ public class JobController {
   public String deleteJob(@PathVariable Long id){
     return jobService.deleteJob(id);
   }
+
+  @PostMapping("/newFromEmployer")
+  public Job jobFromEmployer(@PathVariable Long employerId, @RequestBody Job job){
+    return jobService.JobFromEmployer(employerId, job);
+  }
 }

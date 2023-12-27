@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.job_board.Entity.Application;
 import com.project.job_board.Entity.Employer;
+import com.project.job_board.Entity.Job;
 import com.project.job_board.Service.EmployerService;
 
 @RestController
@@ -60,5 +61,15 @@ public class EmployerController {
   @GetMapping("/applications/{id}")
   public List<Application> getApplications(@PathVariable Long id){
     return employerService.employerApplication(id);
+  }
+
+  @PostMapping("/newJob/{employerId}")
+  public Job newJob(@PathVariable Long employerId, @RequestBody Job job){
+    return employerService.newJob(employerId, job);
+  }
+
+  @PostMapping("/newJobs/{employerId}")
+  public List<Job> newJobs(@PathVariable Long employerId, @RequestBody List<Job> job){
+    return employerService.newJobs(employerId, job);
   }
 }

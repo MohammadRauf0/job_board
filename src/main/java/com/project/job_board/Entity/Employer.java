@@ -47,11 +47,15 @@ public class Employer {
   @JsonIgnore
   List<Application> applications;
 
-  @OneToMany
+  @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnore
+  List<Job> jobs;
 
   public void addApplication(Application application){
     this.applications.add(application);
   }
 
+  public void addJob(Job job){
+    this.jobs.add(job);
+  }
 }

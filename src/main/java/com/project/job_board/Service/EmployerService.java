@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.project.job_board.Entity.Application;
 import com.project.job_board.Entity.Employer;
+import com.project.job_board.Entity.Job;
 import com.project.job_board.Repository.EmployerRepository;
+import com.project.job_board.Repository.JobRepository;
 
 @Service
 public class EmployerService {
 
   @Autowired
   EmployerRepository employerRepository;
+
+  @Autowired
+  JobRepository jobRepository;
 
   public Employer saveEmployer(Employer employer) {
     return employerRepository.save(employer);
@@ -53,9 +58,36 @@ public class EmployerService {
     return null;
   }
 
-  public List<Application> employerApplication(Long id){
-    Employer employer=this.getEmployerById(id);
+  public List<Application> employerApplication(Long id) {
+    Employer employer = this.getEmployerById(id);
     return employer.getApplications();
   }
 
+  public Job newJob(Long employerId, Job job) {
+    Employer employer = this.getEmployerById(employerId);
+    if (employer != null) {
+      job.setEmployer(employer);
+      jobRepository.save(job);
+      employer.addJob(job);
+      employerRepository.flush();
+      return job;
+    }
+    return null;
+
+  }
+
+  public List<Job> newJobs(Long employerId, List<Job> jobs) {
+    Employer employer = this.getEmployerById(employerId);
+    if (employer != null) {
+      for (Job job : jobs) {
+        job.setEmployer(employer);
+        jobRepository.save(job);
+        employer.addJob(job);
+      }
+      employerRepository.flush();
+      System.out.println("COMPLETED");
+      return jobRepository.findByEmployerId(employerId);
+    }
+    return null;
+  }
 }

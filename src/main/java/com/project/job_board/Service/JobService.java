@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.job_board.Entity.Employer;
 import com.project.job_board.Entity.Job;
+import com.project.job_board.Repository.EmployerRepository;
 import com.project.job_board.Repository.JobRepository;
 
 @Service
@@ -13,6 +15,9 @@ public class JobService {
 
   @Autowired
   JobRepository jobRepository;
+
+  @Autowired
+  EmployerRepository employerRepository;
 
   public Job saveJob(Job job) {
     return jobRepository.save(job);
@@ -53,4 +58,16 @@ public class JobService {
     return null;
   }
 
+  public Job JobFromEmployer(Long employerId, Job job){
+    Employer employer = employerRepository.findById(employerId).orElse(null);
+    job.setEmployer(employer);
+    jobRepository.save(job);
+    employer.addJob(job);
+    employerRepository.flush();
+    return job;
+  }
+
+  public List<Job> findByEmployerId(Long jobId){
+    return jobRepository.findByEmployerId(jobId);
+  }
 }

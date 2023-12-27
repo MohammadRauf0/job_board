@@ -141,4 +141,30 @@ public class ApplicationService {
   public List<Application> getApplicationsByApplicantId(Long applicantId){
     return applicationRepository.findByApplicantId(applicantId);
   }
+
+  public Application makeApplication(Application application, Long applicantId, Long jobId){
+    Job job = jobRepository.findById(jobId).orElse(null);
+    if(job==null){
+      return null;
+    }
+    Employer employer = job.getEmployer();
+    Applicant applicant = applicantRepository.findById(applicantId).orElse(null);
+    if(applicant==null){
+      return null;
+    }
+    application.setEmployer(employer);
+    application.setJob(job);
+    application.setApplicant(applicant);
+
+    applicationRepository.save(application);
+
+    employer.addApplication(application);
+    job.addApplication(application);
+    applicant.addApplication(application);
+
+    employerRepository.flush();
+    applicantRepository.flush();
+    jobRepository.flush();
+    return application;
+  }
 }

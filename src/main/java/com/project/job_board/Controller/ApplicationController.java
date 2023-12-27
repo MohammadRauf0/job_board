@@ -56,10 +56,10 @@ public class ApplicationController {
     return applicationService.applicationJob(applicationId);
   }
 
-  @PostMapping("/setEmployer/{applicationId}/{employerId}")
-  public Application setEmployer(@PathVariable Long applicationId, @PathVariable Long employerId){
-    return applicationService.setEmployer(applicationId, employerId);
-  }
+  // @PostMapping("/setEmployer/{applicationId}/{employerId}")
+  // public Application setEmployer(@PathVariable Long applicationId, @PathVariable Long employerId){
+  //   return applicationService.setEmployer(applicationId, employerId);
+  // }
 
   @PostMapping("/setJob/{applicationId}/{jobId}")
   public Application setJob(@PathVariable Long applicationId, @PathVariable Long jobId){
@@ -77,7 +77,7 @@ public class ApplicationController {
   }
 
   @PostMapping("/create/{applicantId}/{jobId}/{employerId}")
-  public Application createNewApplication(@RequestBody Application application, @PathVariable Long applicantId,@PathVariable Long jobId, @PathVariable Long employerId){
+  public Application create(@RequestBody Application application, @PathVariable Long applicantId,@PathVariable Long jobId, @PathVariable Long employerId){
     return applicationService.createApplication(application, applicantId, jobId, employerId);
   }
 
@@ -95,4 +95,10 @@ public class ApplicationController {
   public List<Application> getApplicationsByUserId(@PathVariable Long applicantId){
     return applicationService.getApplicationsByApplicantId(applicantId);
   }
+
+  @PostMapping("/createApplication/{applicantId}/{jobId}")
+  public Application createApplication(@RequestBody Application application, @PathVariable Long applicantId, @PathVariable Long jobId){
+    return applicationService.makeApplication(application, applicantId, jobId);
+  }
+ 
 }
