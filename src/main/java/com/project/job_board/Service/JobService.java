@@ -60,6 +60,9 @@ public class JobService {
 
   public Job JobFromEmployer(Long employerId, Job job){
     Employer employer = employerRepository.findById(employerId).orElse(null);
+    if(employer==null){
+      return null;
+    }
     job.setEmployer(employer);
     jobRepository.save(job);
     employer.addJob(job);
