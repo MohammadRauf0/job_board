@@ -100,5 +100,4 @@ public class ApplicationController {
   public Application createApplication(@RequestBody Application application, @PathVariable Long applicantId, @PathVariable Long jobId){
     return applicationService.makeApplication(application, applicantId, jobId);
   }
- 
 }

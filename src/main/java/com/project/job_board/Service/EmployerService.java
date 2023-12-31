@@ -49,7 +49,7 @@ public class EmployerService {
     Employer existingEmployer = employerRepository.findById(employer.getId()).orElse(null);
     if (existingEmployer != null) {
       existingEmployer.setCompanyName(employer.getCompanyName());
-      existingEmployer.setDiscription(employer.getDiscription());
+      existingEmployer.setDescription(employer.getDescription());
       existingEmployer.setIndustry(employer.getIndustry());
       existingEmployer.setInformation(employer.getInformation());
 

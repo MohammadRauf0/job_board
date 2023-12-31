@@ -29,28 +29,28 @@ public class ApplicationService {
   @Autowired
   ApplicantRepository applicantRepository;
 
-  public Application saveApplication(Application application){
+  public Application saveApplication(Application application) {
     return applicationRepository.save(application);
   }
 
-  public List<Application> saveApplications(List<Application> applications){
+  public List<Application> saveApplications(List<Application> applications) {
     return applicationRepository.saveAll(applications);
   }
 
-  public List<Application> getApplications(){
+  public List<Application> getApplications() {
     return applicationRepository.findAll();
   }
 
-  public Application getApplicationById(Long id){
+  public Application getApplicationById(Long id) {
     return applicationRepository.findById(id).orElse(null);
   }
 
-  public String deleteApplication(Long id){
+  public String deleteApplication(Long id) {
     applicationRepository.deleteById(id);
     return "Deleted Sucessfully" + id;
   }
 
-  public Application updateApplication(Application application){
+  public Application updateApplication(Application application) {
     Application existingApplication = applicationRepository.findById(application.getId()).orElse(null);
     existingApplication.setStatus(application.getStatus());
     existingApplication.setApplicationDate(application.getApplicationDate());
@@ -79,13 +79,13 @@ public class ApplicationService {
         " <br> CoverLetter : " + applicant.getCoverletter() + "<br>}<br>" +
         "Job: <br>{ <br>title:" + job.getTitle() +
         " <br>Location: " + job.getLocation() +
-        " <br>Discription: " + job.getDiscription() +
+        " <br>Discription: " + job.getDescription() +
         " <br>Requirements: " + job.getRequirements() +
         " <br>Responsibilities: " + job.getResponsibilities() + "<br>}";
     return result;
   }
 
-  public Application setEmployer(Long applicationId, Long employerId){
+  public Application setEmployer(Long applicationId, Long employerId) {
     Employer employer = employerRepository.findById(employerId).orElse(null);
     Application application = applicationRepository.findById(applicationId).orElse(null);
     application.setEmployer(employer);
@@ -105,7 +105,7 @@ public class ApplicationService {
     return application;
   }
 
-  public Application setApplicant(Long applicationId, Long applicantId){
+  public Application setApplicant(Long applicationId, Long applicantId) {
     Applicant applicant = applicantRepository.findById(applicantId).orElse(null);
     Application application = applicationRepository.findById(applicationId).orElse(null);
     application.setApplicant(applicant);
@@ -115,14 +115,14 @@ public class ApplicationService {
     return application;
   }
 
-  public Application setEverything(Long applicationId, Long applicantId, Long JobId, Long EmployerId){
+  public Application setEverything(Long applicationId, Long applicantId, Long JobId, Long EmployerId) {
     setApplicant(applicationId, applicantId);
     setEmployer(applicationId, EmployerId);
     setJob(applicationId, JobId);
     return getApplicationById(applicationId);
   }
 
-  public Application createApplication(Application application, Long applicantId, Long jobId, Long employerId){
+  public Application createApplication(Application application, Long applicantId, Long jobId, Long employerId) {
     saveApplication(application);
     setApplicant(application.getId(), applicantId);
     setEmployer(application.getId(), employerId);
@@ -130,26 +130,26 @@ public class ApplicationService {
     return application;
   }
 
-  public List<Application> getApplicationsByJobId(Long jobId){
+  public List<Application> getApplicationsByJobId(Long jobId) {
     return applicationRepository.findByJobId(jobId);
   }
 
-  public List<Application> getApplicationsByEmployerId(Long employerId){
+  public List<Application> getApplicationsByEmployerId(Long employerId) {
     return applicationRepository.findByEmployerId(employerId);
   }
 
-  public List<Application> getApplicationsByApplicantId(Long applicantId){
+  public List<Application> getApplicationsByApplicantId(Long applicantId) {
     return applicationRepository.findByApplicantId(applicantId);
   }
 
-  public Application makeApplication(Application application, Long applicantId, Long jobId){
+  public Application makeApplication(Application application, Long applicantId, Long jobId) {
     Job job = jobRepository.findById(jobId).orElse(null);
-    if(job==null){
+    if (job == null) {
       return null;
     }
     Employer employer = job.getEmployer();
     Applicant applicant = applicantRepository.findById(applicantId).orElse(null);
-    if(applicant==null){
+    if (applicant == null) {
       return null;
     }
     application.setEmployer(employer);

@@ -48,7 +48,7 @@ public class JobService {
     Job existingJob = jobRepository.findById(job.getId()).orElse(null);
     if (existingJob != null) {
       existingJob.setTitle(job.getTitle());
-      existingJob.setDiscription(job.getDiscription());
+      existingJob.setDescription(job.getDescription());
       existingJob.setLocation(job.getLocation());
       existingJob.setRequirements(job.getRequirements());
       existingJob.setResponsibilities(job.getResponsibilities());
@@ -58,9 +58,9 @@ public class JobService {
     return null;
   }
 
-  public Job JobFromEmployer(Long employerId, Job job){
+  public Job JobFromEmployer(Long employerId, Job job) {
     Employer employer = employerRepository.findById(employerId).orElse(null);
-    if(employer==null){
+    if (employer == null) {
       return null;
     }
     job.setEmployer(employer);
@@ -70,7 +70,7 @@ public class JobService {
     return job;
   }
 
-  public List<Job> findByEmployerId(Long jobId){
+  public List<Job> findByEmployerId(Long jobId) {
     return jobRepository.findByEmployerId(jobId);
   }
 }
