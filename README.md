@@ -34,4 +34,56 @@ Welcome to the Job Board Spring Boot application! This project has undergone mul
 6. **Custom Functions:** Testing of custom functions and main application endpoints.
 7. **GitHub Commits:** Detailed history of GitHub commits.
 
-Feel free to explore and contribute to this exciting project! If you have any questions or issues, please refer to the documentation or reach out to the project owner. Happy coding! 🚀
+## Endpoints
+
+### ApplicantController:
+
+- `POST /applicant/addApplicant`
+- `POST /applicant/addApplicants`
+- `GET /applicant/applicants`
+- `GET /applicant/applicantById/{id}`
+- `GET /applicant/applicantByName/{name}`
+- `PUT /applicant/update`
+- `DELETE /applicant/delete/{id}`
+
+### ApplicationController:
+
+- `POST /application/addApplication`
+- `POST /application/addApplications`
+- `GET /application/applications`
+- `GET /application/applicationById/{id}`
+- `PUT /application/update`
+- `DELETE /application/delete/{id}`
+- `GET /application/ApplicantAndJob/{applicationId}`
+- `POST /application/setJob/{applicationId}/{jobId}`
+- `POST /application/setApplicant/{applicationId}/{applicantId}`
+- `POST /application/setAllRelations/{ApplicationId}/{applicantId}/{jobId}/{EmployerId}`
+- `POST /application/create/{applicantId}/{jobId}/{employerId}`
+- `GET /application/jobApplications/{jobId}`
+- `GET /application/employerApplications/{employerId}`
+- `GET /application/applicantApplications/{applicantId}`
+- `POST /application/createApplication/{applicantId}/{jobId}`
+
+### EmployerController:
+
+- `POST /employer/addEmployer`
+- `POST /employer/addEmployers`
+- `GET /employer/employers`
+- `GET /employer/employerById/{id}`
+- `GET /employer/employerByTitle/{title}`
+- `PUT /employer/update`
+- `DELETE /employer/delete/{id}`
+- `GET /employer/applications/{id}`
+- `POST /employer/newJob/{employerId}`
+- `POST /employer/newJobs/{employerId}`
+
+### JobController:
+
+- `POST /job/addJob`
+- `POST /job/addJobs`
+- `GET /job/jobs`
+- `GET /job/jobById/{id}`
+- `GET /job/jobByTitle/{title}`
+- `PUT /job/update`
+- `DELETE /job/delete/{id}`
+- `POST /job/newFromEmployer`
