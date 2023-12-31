@@ -1,10 +1,3 @@
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
 # Job Board Spring Boot Application
 
 Welcome to the Job Board Spring Boot application! This project has undergone multiple modifications and edits, so it is highly recommended to clone it using GitHub.
